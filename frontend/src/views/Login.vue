@@ -43,7 +43,10 @@ export default {
         .then(request => this.registerSuccess(request))
         .catch(() => this.registerFail())
     },
-    registerSuccess (req) {
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    },
+    async registerSuccess (req) {
       if (!req.data.token) {
         this.registerFail()
         return
@@ -51,7 +54,7 @@ export default {
 
       localStorage.token = req.data.token
       this.error = false
-
+      await this.sleep(2000)
       this.$router.replace(this.$route.query.redirect || '/warehouseList')
     },
     checkCurrentLogin () {

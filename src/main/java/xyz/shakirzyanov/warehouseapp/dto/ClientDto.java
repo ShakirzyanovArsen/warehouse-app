@@ -1,22 +1,10 @@
-package xyz.shakirzyanov.warehouseapp.model;
+package xyz.shakirzyanov.warehouseapp.dto;
 
-import java.util.Date;
-
-public class Client {
-    private String uuid;
+public class ClientDto {
     private String name;
     private String phone;
     private String email;
     private String address;
-    private Date createdAt;
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 
     public String getName() {
         return name;
@@ -48,13 +36,5 @@ public class Client {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 }

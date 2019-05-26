@@ -4,14 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import xyz.shakirzyanov.warehouseapp.model.Goods;
 import xyz.shakirzyanov.warehouseapp.repository.mapper.GoodsMapper;
-
-import java.util.List;
-
 
 @Repository
 public class GoodsRepository {
