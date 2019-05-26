@@ -1,0 +1,33 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: ./
+      dockerfile: ./docker_env/Dockerfile
+    container_name: nginx
+    depends_on:
+      - backend
+    volumes:
+      - ./docker_env/nginx.conf:/etc/nginx/nginx.conf
+#      - ./frontend/dist:/var/www/
+    ports:
+      - 8080:80
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: backend
+    expose:
+      - "80"
+  clickhouse-server:
+    image: yandex/clickhouse-server:19
+    ports:
+      - 9000:9000
+      - 8123:8123
+      - 9009:9009
+    volumes:
+      - ./data:/var/lib/clickhouse
+  clickhouse-client:
+    image: yandex/clickhouse-client:19
+    command: --host clickhouse-server
+
