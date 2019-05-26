@@ -2,7 +2,7 @@ package xyz.shakirzyanov.warehouseapp.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum  GoodsUnit {
+public enum GoodsUnit {
     @JsonProperty("кг.")
     KG("кг.", 1),
     @JsonProperty("л.")
@@ -23,5 +23,18 @@ public enum  GoodsUnit {
 
     public Integer getValue() {
         return value;
+    }
+
+    public static GoodsUnit byTitle(String title) {
+        switch (title) {
+            case "кг.":
+                return KG;
+            case "л.":
+                return LITER;
+            case "шт.":
+                return SHT;
+            default:
+                throw new IllegalArgumentException("Unrecognized GoodsUnit title");
+        }
     }
 }

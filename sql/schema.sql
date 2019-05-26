@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS client
 CREATE TABLE IF NOT EXISTS goods
 (
     uuid       UUID DEFAULT generateUUIDv4(),
+    name       String CODEC(LZ4),
     count      Float64 CODEC(LZ4),
     unit       Enum8('кг.' = 1, 'л.' = 2, 'шт.' = 3),
     barcode    String CODEC(LZ4),

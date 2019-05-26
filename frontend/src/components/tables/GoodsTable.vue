@@ -1,6 +1,6 @@
 <template>
   <div class="goodsTable container-fluid">
-    <b-table striped hover :items="items" :fields="fields"/>
+    <b-table ref="goodsTable" striped hover :items="items" :fields="fields"/>
     <b-pagination
       :total-rows="totalRows"
       :per-page="perPage"
@@ -8,11 +8,17 @@
       v-on:change="paginationChanged"
       class="my-0"
     />
+    <b-button v-b-modal.createGoodsModal>Добавить товар</b-button>
+    <b-modal id="createGoodsModal" ref="createGoodsModal" hide-footer>
+      <CreateGoodsForm v-bind:after-save="afterSave"/>
+    </b-modal>
   </div>
 </template>
 <script>
+import CreateGoodsForm from '../forms/CreateGoodsForm'
 export default {
   name: 'GoodsTable',
+  components: { CreateGoodsForm },
   data () {
     return {
       fields: {
@@ -49,13 +55,20 @@ export default {
       this.currentPage = page
     },
     updateTable () {
-      return [{
-        name: 'Стул',
-        count: 10,
-        unit: 'Шт.',
-        barcode: '123456789',
-        lastOut: '12-02-2019 11:30'
-      }]
+      this.$http.get('/goods', {
+        params: {
+          pageNumber: this.currentPage,
+          perPage: this.perPage
+        }
+      }).then((request) => {
+        this.items = request.data.content
+        this.totalRows = request.data.totalElements
+        this.$refs.goodsTable.refresh()
+      })
+    },
+    afterSave () {
+      this.updateTable()
+      this.$refs.createGoodsModal.hide()
     }
   }
 }

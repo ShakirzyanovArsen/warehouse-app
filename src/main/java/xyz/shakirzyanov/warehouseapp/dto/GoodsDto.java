@@ -1,24 +1,12 @@
-package xyz.shakirzyanov.warehouseapp.model;
+package xyz.shakirzyanov.warehouseapp.dto;
 
 import xyz.shakirzyanov.warehouseapp.model.enums.GoodsUnit;
 
-import java.util.Date;
-
-public class Goods {
-    private String uuid;
+public class GoodsDto {
     private String name;
     private Double count;
     private GoodsUnit unit;
     private String barcode;
-    private Date createdAt;
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 
     public String getName() {
         return name;
@@ -50,16 +38,5 @@ public class Goods {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
-    }
-
-    public Date getCreatedAt() {
-        if(createdAt == null) {
-            createdAt = new Date();
-        }
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 }
