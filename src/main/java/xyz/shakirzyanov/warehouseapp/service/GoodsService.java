@@ -31,4 +31,8 @@ public class GoodsService {
     public Page<Goods> getList(Pageable page) {
         return goodsRepository.findGoodsByPage(page);
     }
+
+    public Goods getByUuid(String uuid) {
+        return goodsRepository.findByUuid(uuid);
+    }
 }

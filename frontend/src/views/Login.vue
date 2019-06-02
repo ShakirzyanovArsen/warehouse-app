@@ -43,7 +43,7 @@ export default {
         .then(request => this.registerSuccess(request))
         .catch(() => this.registerFail())
     },
-    sleep(ms) {
+    sleep (ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     },
     async registerSuccess (req) {

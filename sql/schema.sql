@@ -29,17 +29,20 @@ CREATE TABLE IF NOT EXISTS goods
 ) ENGINE = ReplacingMergeTree(created_at)
       ORDER BY uuid;
 
-CREATE TABLE IF NOT EXISTS transaction
+CREATE TABLE IF NOT EXISTS document
 (
     uuid          UUID DEFAULT generateUUIDv4(),
+    userUuid      UUID,
     warehouseUuid UUID,
+    clientUuid    UUID,
     goods         Array(UUID),
     counts        Array(Float64),
     type          Enum8('Приход' = 1, 'Расход' = 2),
-    filePath      String CODEC(LZ4),
-    sigPath       String CODEC(LZ4),
+    fileName      String CODEC(LZ4),
+    fileHash      String CODEC(LZ4),
+    sigFileName       String CODEC(LZ4),
     ended         UInt8,
-    created_at DateTime
+    created_at    DateTime
 ) ENGINE = ReplacingMergeTree(created_at)
       ORDER BY uuid;
 

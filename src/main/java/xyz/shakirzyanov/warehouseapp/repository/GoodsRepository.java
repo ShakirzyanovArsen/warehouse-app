@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import xyz.shakirzyanov.warehouseapp.model.Goods;
 import xyz.shakirzyanov.warehouseapp.repository.mapper.GoodsMapper;
 
+import java.util.List;
+
 @Repository
 public class GoodsRepository {
 
@@ -28,5 +30,13 @@ public class GoodsRepository {
         var goods = jdbcTemplate.query(sql, mapper,
                 page.getPageSize(), page.getOffset());
         return new PageImpl<>(goods, page, count);
+    }
+
+    public Goods findByUuid(String uuid) {
+        var goodsList = jdbcTemplate.query("SELECT * FROM goods FINAL WHERE uuid = ?", mapper, uuid);
+        if(goodsList.isEmpty()) {
+            return null;
+        }
+        return goodsList.get(0);
     }
 }

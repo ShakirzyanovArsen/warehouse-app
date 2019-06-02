@@ -9,6 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faWarehouse, faShoppingCart, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import axios from './vue-axios'
+import VueMask from 'v-mask'
 
 library.add(faWarehouse)
 library.add(faUser)
@@ -20,6 +21,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueSidebarMenu)
+Vue.use(VueMask)
 
 new Vue({
   router,

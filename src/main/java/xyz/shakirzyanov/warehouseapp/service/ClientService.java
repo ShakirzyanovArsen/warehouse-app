@@ -32,4 +32,8 @@ public class ClientService {
     public Page<Client> getList(Pageable pageable) {
         return clientRepository.findClientsByPage(pageable);
     }
+
+    public Client getByUuid(String uuid) {
+        return clientRepository.findByUuid(uuid);
+    }
 }

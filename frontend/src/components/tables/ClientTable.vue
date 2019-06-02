@@ -1,6 +1,6 @@
 <template>
   <div class="clientList container-fluid">
-    <b-table striped hover :items="items" :fields="fields"/>
+    <b-table ref="clientsTable" striped hover :items="items" :fields="fields"/>
     <b-pagination
       :total-rows="totalRows"
       :per-page="perPage"
@@ -8,12 +8,18 @@
       v-on:change="paginationChanged"
       class="my-0"
     />
+    <b-button v-b-modal.createClientModal>Добавить контрагента</b-button>
+    <b-modal id="createClientModal" ref="createClientModal" hide-footer>
+      <CreateClientForm v-bind:after-save="afterSave"/>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import CreateClientForm from '../forms/CreateClientForm'
 export default {
   name: 'ClientTable',
+  components: { CreateClientForm },
   data () {
     return {
       fields: {
@@ -46,12 +52,20 @@ export default {
       this.currentPage = page
     },
     updateTable () {
-      return [{
-        name: 'ООО "Ромашка"',
-        phone: '8 800 5553535',
-        email: 'romashka@gmail.com',
-        address: 'г. Пермь, Космонавтов шоссе, 74'
-      }]
+      this.$http.get('/client', {
+        params: {
+          pageNumber: this.currentPage,
+          perPage: this.perPage
+        }
+      }).then((request) => {
+        this.items = request.data.content
+        this.totalRows = request.data.totalElements
+        this.$refs.clientsTable.refresh()
+      })
+    },
+    afterSave () {
+      this.updateTable()
+      this.$refs.createClientModal.hide()
     }
   }
 }

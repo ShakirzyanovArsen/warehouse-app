@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import xyz.shakirzyanov.warehouseapp.model.Client;
 
+import java.util.List;
+
 @Repository
 public class ClientRepository {
     @Autowired
@@ -25,5 +27,14 @@ public class ClientRepository {
         var sql = "SELECT * FROM client FINAL ORDER BY client.created_at DESC LIMIT ? OFFSET ?";
         var clients = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Client.class), page.getPageSize(), page.getOffset());
         return new PageImpl<>(clients, page, count);
+    }
+
+    public Client findByUuid(String uuid) {
+        var clients = jdbcTemplate.query("SELECT * FROM client FINAL WHERE uuid = ?",
+                new BeanPropertyRowMapper<>(Client.class), uuid);
+        if(clients.isEmpty()) {
+            return null;
+        }
+        return clients.get(0);
     }
 }
