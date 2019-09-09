@@ -4,6 +4,7 @@ import WarehouseList from './views/WarehouseList.vue'
 import ClientList from './views/ClientList.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import Keys from './views/Keys'
 
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/clientList',
       name: 'clientList',
       component: ClientList
+    },
+    {
+      path: '/keys',
+      name: 'keys',
+      component: Keys
     }
   ]
 })

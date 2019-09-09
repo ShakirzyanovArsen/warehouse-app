@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueSidebarMenu from 'vue-sidebar-menu'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faWarehouse, faShoppingCart, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faWarehouse, faShoppingCart, faUser, faSignOutAlt, faKey } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import axios from './vue-axios'
 import VueMask from 'v-mask'
@@ -15,6 +15,7 @@ library.add(faWarehouse)
 library.add(faUser)
 library.add(faShoppingCart)
 library.add(faSignOutAlt)
+library.add(faKey)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

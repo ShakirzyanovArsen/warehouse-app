@@ -23,4 +23,15 @@ public enum DocumentType {
     public Integer getValue() {
         return value;
     }
+
+    public static DocumentType byTitle(String title) {
+        switch (title) {
+            case "Приход":
+                return DocumentType.IN;
+            case "Расход":
+                return DocumentType.OUT;
+            default:
+                throw new IllegalArgumentException("Unrecognized DocumentType title");
+        }
+    }
 }

@@ -35,12 +35,12 @@ CREATE TABLE IF NOT EXISTS document
     userUuid      UUID,
     warehouseUuid UUID,
     clientUuid    UUID,
-    goods         Array(UUID),
+    goods         Array(String),
     counts        Array(Float64),
     type          Enum8('Приход' = 1, 'Расход' = 2),
     fileName      String CODEC(LZ4),
     fileHash      String CODEC(LZ4),
-    sigFileName       String CODEC(LZ4),
+    sigFileName   Nullable(String) CODEC(LZ4),
     ended         UInt8,
     created_at    DateTime
 ) ENGINE = ReplacingMergeTree(created_at)

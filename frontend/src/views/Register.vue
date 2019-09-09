@@ -68,7 +68,7 @@ export default {
       }
     },
     registerFail () {
-      this.error = 'Register fail failed!'
+      this.error = 'Register failed!'
       delete localStorage.token
     }
   }
